@@ -69,7 +69,17 @@ function optionOf(brand, items) {
     xAxis: {
       type: "time",
       axisLine: { lineStyle: { color: "rgba(160,200,255,.35)" } },
-      axisLabel: { color: "rgba(220,235,255,.8)" },
+    
+      axisLabel: {
+        color: "rgba(220,235,255,.8)",
+        formatter: (value) => {
+        // value 可能是时间戳或日期字符串
+          const d = new Date(value);
+          const yy = String(d.getFullYear()).slice(-2);
+          const mm = String(d.getMonth() + 1).padStart(2, "0");
+          return `${yy}${mm}`; // 例如 2210、2504
+        }
+      },
       splitLine: { lineStyle: { color: "rgba(160,200,255,.10)" } },
     },
     yAxis: {
@@ -203,3 +213,4 @@ watch(list, render);
   z-index: 1;
 }
 </style>
+
